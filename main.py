@@ -35,10 +35,6 @@ copy_button.pack(side='left', padx=10)
 enter_button = tk.Button(button_frame, text="Enter")
 enter_button.pack(side='left', padx=10)
 
-# Store the entry widgets in a dictionary
-
-
-
 
 def on_enter():
     data = {item: entry.get() for item, entry in entries.items()}
