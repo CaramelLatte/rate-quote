@@ -2,7 +2,7 @@ import tkinter as tk
 
 # Create the main window
 root = tk.Tk()
-root.title("Sample Input Form")
+root.title("Freight Quote Tool")
 root.geometry("720x480")
 
 # Create a frame to hold the list of labels and entry boxes
@@ -14,37 +14,37 @@ class Items():
     def __init__(self, item, weight):
         self.item = item
         self.weight = weight
-        self.boxes={"v4kit": 0, "9x8x4": 0, "small": 0, "10x10x5": 0, "cube": 0, "square": 0, "v4master": 0, "6pak": 0, "9pak": 0, "9pak-6": 0, "9pak-3": 0, "samsungkit": 0, "connectkit": 0,  "samsung4pk": 0, "connectmast": 0}
+        self.boxes={"v4kit": 0, "9x8x4": 0, "small": 0, "10x10x5": 0, "cube": 0, "square": 0, "v4master": 0, "6pak": 0, "9pak-3": 0, "9pak-6": 0, "9pak": 0, "samsungkit": 0, "connectkit": 0,  "samsung4pk": 0, "connectmast": 0}
 
 #Define items, and update the boxes attribute (weight is rounded up per sku)
-v4kit = Items("V4", 0.7)
-v4kit.boxes.update({"v4kit": .7, "9x8x4": 4, "v4master": 20, "6pak": 42, "connectmast": 50})
+v4kit = Items("V4 Kit", 0.7)
+v4kit.boxes.update({"v4kit": 1, "9x8x4": 4, "v4master": 20, "6pak": 42, "connectmast": 50})
 
-v4kit_handheld = Items("v4kit+handheld", 3)
+v4kit_handheld = Items("V4 + Handheld", 3)
 v4kit_handheld.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_zpass = Items("v4kit+zpass", 3)
+v4kit_zpass = Items("V4 + Zpass", 3)
 v4kit_zpass.boxes.update({"v4kit": 1, "9x8x4": 2, "6pak": 6, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_handheld_zpass = Items("v4kit+handheld+zpass", 5)
+v4kit_handheld_zpass = Items("V4kit + Handheld + Zpass", 5)
 v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 32})
 
-tablet = Items("tablet", 4)
+tablet = Items("Tablet Kit", 4)
 tablet.boxes.update({"samsungkit": 1, "samsung4pk": 4})
 
-tablet_v4 = Items("tablet+v4", 5)
+tablet_v4 = Items("Tablet + V4", 5)
 tablet_v4.boxes.update({"samsungkit": 1, "samsung4pk": 4})
 
-tablet_camera = Items("tablet+camera", 7)
+tablet_camera = Items("Tablet + Camera", 7)
 tablet_camera.boxes.update({"connectkit": 1, "connectmast": 4})
 
-tablet_camera_v4 = Items("tablet+camera+v4", 8)
+tablet_camera_v4 = Items("Tablet + Camera + V4", 8)
 tablet_camera_v4.boxes.update({"connectkit": 1, "connectmast": 4})
 
-ztrak = Items("ztrak", 0.5)
+ztrak = Items("Ztrak", 0.5)
 ztrak.boxes.update({"9x8x4": 24, "square": 80, "v4master": 136})
 
-cards = Items("cards", 0.01)
+cards = Items("Cards", 0.01)
 cards.boxes.update({"9x8x4": 600, "cube": 1200, "v4master": 2000})
 
 items = []
@@ -168,13 +168,23 @@ def box_builder(data):
     for sku in data:
         for item in items:
             if item.item == sku and data[sku] != "":
+                smallest_box = ""
+                for box in item.boxes:
+                    print(item.boxes[box])
+                    if int(data[sku]) >= item.boxes[box]  and item.boxes[box] != 0:
+                        smallest_box = sku
+                        
+                print(smallest_box)
                 for key in reversed(list(item.boxes.keys())):
+                    largest_box = 0
+                    # if largest_box < 
+
+
                     if int(data[sku]) >= item.boxes[key] and item.boxes[key] != 0:
                         
                         new_box = Boxes(key, (item.weight * item.boxes[key]))
-                        print(new_box, new_box.weight)
+                        print(f'Box: {new_box.template} Weight: {new_box.weight}')
                         boxes.append(new_box)
-                        # boxes.append((key, (item.boxes[key] * item.weight)))
                         data[sku] = int(data[sku]) - item.boxes[key]
                         if data[sku] == 0:
                             print(f'Total number of boxes: {len(boxes)}')

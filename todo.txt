@@ -1,0 +1,1 @@
+Fix partial box packing. Rewrite existing function to only fill whole boxes when iterating from the back of the list. Create new function to iterate through from the start of the list and update with each box where remaining quantity < box capacity until it is done, create a box with that final step
