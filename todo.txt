@@ -1,1 +1,8 @@
 Fix partial box packing. Rewrite existing function to only fill whole boxes when iterating from the back of the list. Create new function to iterate through from the start of the list and update with each box where remaining quantity < box capacity until it is done, create a box with that final step
+
+workflow - 
+
+pack whole boxes - iterate from back of list to find largest box. While quantity of SKU is greater than maximum capacity of box, repeat creating a box until quantity remaining is less than largest box. If quantity is less than largest box, immediately proceed to pack partial phase
+*if multiple boxes are required only the largest should be used, to cut down on number of boxes. Therefore only check the largest box, else assume only one box will be shipped and partial pack makes more sense
+
+pack partial box - once check for multiple of largest box completes or fails, begin iterating from the front of the box list until we find the first box with capacity greater than the remainder

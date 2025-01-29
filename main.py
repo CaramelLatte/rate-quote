@@ -5,9 +5,6 @@ root = tk.Tk()
 root.title("Freight Quote Tool")
 root.geometry("720x480")
 
-# Create a frame to hold the list of labels and entry boxes
-frame = tk.Frame(root)
-frame.pack(pady=20)
 
 #Item template class
 class Items():
@@ -59,13 +56,8 @@ items.append(tablet_camera_v4)
 items.append(ztrak)
 items.append(cards)
 
-class Boxes():  
-    def __init__(self, template, weight, length=0, width=0, height=0):
-        self.template = template
-        self.weight = weight
-boxes = []
 
-#Define all of the box templates, add them to array
+#Define all of the box templates, then add them to array
 class Templates():
     def __init__(self, template, length, width, height):
         self.template = template
@@ -106,6 +98,19 @@ connectmasttemplate = Templates("connectmast", 22, 12, 16)
 templates.append(connectmasttemplate)
 
 
+# Class for boxes to be created during packing check
+class Boxes():  
+    def __init__(self, template, weight, length=0, width=0, height=0):
+        self.template = template
+        self.weight = weight
+boxes = []
+
+
+# Create a frame to hold the list of labels and entry boxes
+frame = tk.Frame(root)
+frame.pack(pady=20)
+
+
 # Create the labels and entry boxes
 entries = {}
 for item in items:
@@ -120,19 +125,23 @@ for item in items:
     
     entries[item.item] = entry
 
+
 # Create a frame to hold the buttons
 button_frame = tk.Frame(root)
 button_frame.pack(pady=20)
 
-# Create the 'Copy' button, initially grayed out
+
+# Create the 'Copy' button
 copy_button = tk.Button(button_frame, text="Copy")
 copy_button.pack(side='left', padx=10)
+
 
 # Create the 'Enter' button
 enter_button = tk.Button(button_frame, text="Enter")
 enter_button.pack(side='left', padx=10)
 
 
+# Define functions for buttons
 def on_enter():
     for box in reversed(boxes):
        boxes.remove(box)
@@ -168,30 +177,33 @@ def box_builder(data):
     for sku in data:
         for item in items:
             if item.item == sku and data[sku] != "":
-                smallest_box = ""
-                for box in item.boxes:
-                    print(item.boxes[box])
-                    if int(data[sku]) >= item.boxes[box]  and item.boxes[box] != 0:
-                        smallest_box = sku
-                        
-                print(smallest_box)
-                for key in reversed(list(item.boxes.keys())):
-                    largest_box = 0
-                    # if largest_box < 
-
-
-                    if int(data[sku]) >= item.boxes[key] and item.boxes[key] != 0:
-                        
+                remaining_qty = int(data[sku])
+                for key in sorted(item.boxes.keys(), key=lambda k: item.boxes[k], reverse=True):
+                    # First pass: Pack full boxes from largest to smallest
+                    while remaining_qty >= item.boxes[key] and item.boxes[key] != 0:
                         new_box = Boxes(key, (item.weight * item.boxes[key]))
-                        print(f'Box: {new_box.template} Weight: {new_box.weight}')
                         boxes.append(new_box)
-                        data[sku] = int(data[sku]) - item.boxes[key]
-                        if data[sku] == 0:
-                            print(f'Total number of boxes: {len(boxes)}')
-                            string_builder(boxes)
-                            break
-                        else:
-                            box_builder(data)
+                        remaining_qty -= item.boxes[key]
+
+                    # Second pass: Check if a smaller box can fit the remaining quantity
+                    if remaining_qty > 0:
+                        # Find the smallest box that can fit the remaining quantity
+                        best_box = None
+                        for small_key in item.boxes:
+                            if item.boxes[small_key] != 0 and item.boxes[small_key] >= remaining_qty:
+                                if best_box is None or item.boxes[small_key] < item.boxes[best_box]:
+                                    best_box = small_key
+                        
+                        if best_box:
+                            new_box = Boxes(best_box, (item.weight * remaining_qty))
+                            boxes.append(new_box)
+                            remaining_qty = 0
+
+                data[sku] = remaining_qty
+                if remaining_qty == 0:
+                    print(f'Total number of boxes: {len(boxes)}')
+                    string_builder(boxes)
+                    break
 
 # Run the application
 root.mainloop()
