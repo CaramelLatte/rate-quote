@@ -44,6 +44,9 @@ ztrak.boxes.update({"9x8x4": 24, "square": 80, "v4master": 136})
 cards = Items("Cards", 0.01)
 cards.boxes.update({"9x8x4": 600, "cube": 1200, "v4master": 2000})
 
+ldtcu = Items("LDTCU", 0.2)
+ldtcu.boxes.update({"v4kit": 6, "9x8x4": 18, "10x10x5": 36, "cube": 70, "square": 80, "v4master": 200})
+
 items = []
 items.append(v4kit)
 items.append(v4kit_handheld)
@@ -55,7 +58,7 @@ items.append(tablet_camera)
 items.append(tablet_camera_v4)
 items.append(ztrak)
 items.append(cards)
-
+items.append(ldtcu)
 
 #Define all of the box templates, then add them to array
 class Templates():
