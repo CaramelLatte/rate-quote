@@ -164,6 +164,8 @@ def do_copy():
     root.update()
     for box in reversed(boxes):
        boxes.remove(box)
+    for item in entries:
+        entries[item].delete(0, 'end')
 
 
 # Update the buttonsto call their respective functions
