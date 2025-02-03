@@ -26,6 +26,9 @@ v4kit_zpass.boxes.update({"v4kit": 1, "9x8x4": 2, "6pak": 6, "9pak": 9, "9pak-6"
 v4kit_handheld_zpass = Items("V4kit + Handheld + Zpass", 5)
 v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 32})
 
+handheld_kit = Items("Handheld Kit", 2)
+handheld_kit.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
+
 tablet = Items("Tablet Kit", 4)
 tablet.boxes.update({"samsungkit": 1, "samsung4pk": 4})
 
@@ -52,6 +55,7 @@ items.append(v4kit)
 items.append(v4kit_handheld)
 items.append(v4kit_zpass)
 items.append(v4kit_handheld_zpass)
+items.append(handheld_kit)
 items.append(tablet)
 items.append(tablet_v4)
 items.append(tablet_camera)
