@@ -159,8 +159,12 @@ def string_builder(boxes):
     out = []
     for box in boxes:
         for template in templates:
+            
             if box.template == template.template:
-                outstring = f'{box.template}\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tLB\n'
+                if box.template == "9pak-6" or box.template == "9pak-3":
+                    outstring = f'9pak\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tOZ\n'
+                else:
+                    outstring = f'{box.template}\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tLB\n'
                 out.append(outstring)
     return '\n'.join(out)
 
