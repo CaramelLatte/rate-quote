@@ -24,7 +24,7 @@ v4kit_zpass = Items("V4 Kit + Zpass Kit", 3)
 v4kit_zpass.boxes.update({"v4kit": 1, "9x8x4": 2, "6pak": 6, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
 v4kit_handheld_zpass = Items("V4 Kit + Handheld Kit + Zpass Kit", 5)
-v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 32})
+v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
 handheld_kit = Items("Handheld Kit", 2)
 handheld_kit.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
@@ -161,7 +161,9 @@ def string_builder(boxes):
         for template in templates:
             
             if box.template == template.template:
-                if box.template == "9pak-6" or box.template == "9pak-3":
+                if box.template == "9pak-3":
+                     outstring = f'9pak\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tOZ\n'
+                elif box.template == "9pak-6":
                     outstring = f'9pak\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tOZ\n'
                 else:
                     outstring = f'{box.template}\t{template.length}\t{template.width}\t{template.height}\tINCH\t{box.weight}\tLB\n'
