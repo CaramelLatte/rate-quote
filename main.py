@@ -17,13 +17,13 @@ class Items():
 v4kit = Items("V4 Kit", 0.7)
 v4kit.boxes.update({"v4kit": 1, "9x8x4": 4, "v4master": 20, "6pak": 42, "connectmast": 50})
 
-v4kit_handheld = Items("V4 + Handheld", 3)
+v4kit_handheld = Items("V4 Kit + Handheld Kit", 3)
 v4kit_handheld.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_zpass = Items("V4 + Zpass", 3)
+v4kit_zpass = Items("V4 Kit + Zpass Kit", 3)
 v4kit_zpass.boxes.update({"v4kit": 1, "9x8x4": 2, "6pak": 6, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_handheld_zpass = Items("V4kit + Handheld + Zpass", 5)
+v4kit_handheld_zpass = Items("V4 Kit + Handheld Kit + Zpass Kit", 5)
 v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 32})
 
 handheld_kit = Items("Handheld Kit", 2)
@@ -32,13 +32,13 @@ handheld_kit.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-
 tablet = Items("Tablet Kit", 4)
 tablet.boxes.update({"samsungkit": 1, "samsung4pk": 4})
 
-tablet_v4 = Items("Tablet + V4", 5)
+tablet_v4 = Items("Tablet Kit + V4 Kit", 5)
 tablet_v4.boxes.update({"samsungkit": 1, "samsung4pk": 4})
 
-tablet_camera = Items("Tablet + Camera", 7)
+tablet_camera = Items("Tablet Kit + Camera", 7)
 tablet_camera.boxes.update({"connectkit": 1, "connectmast": 4})
 
-tablet_camera_v4 = Items("Tablet + Camera + V4", 8)
+tablet_camera_v4 = Items("Tablet Kit + Camera + V4 Kit", 8)
 tablet_camera_v4.boxes.update({"connectkit": 1, "connectmast": 4})
 
 ztrak = Items("Ztrak", 0.5)
@@ -124,7 +124,7 @@ for item in items:
     row_frame = tk.Frame(frame)
     row_frame.pack(fill='x', pady=5)
     
-    label = tk.Label(row_frame, text=item.item, width=20, anchor='w')
+    label = tk.Label(row_frame, text=item.item, width=30, anchor='w')
     label.pack(side='left', padx=10)
     
     entry = tk.Entry(row_frame, width=50)
