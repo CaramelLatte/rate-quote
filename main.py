@@ -3,7 +3,7 @@ import tkinter as tk
 # Create the main window
 root = tk.Tk()
 root.title("Freight Quote Tool")
-root.geometry("720x480")
+root.geometry("720x520")
 
 
 #Item template class
@@ -17,13 +17,16 @@ class Items():
 v4kit = Items("V4 Kit", 0.7)
 v4kit.boxes.update({"v4kit": 1, "9x8x4": 4, "v4master": 20, "6pak": 42, "connectmast": 50})
 
+v4kit_cable = Items("V4 Kit + Cables", 1)
+v4kit_cable.boxes.update({"v4kit": 1, "9x8x4": 4, "v4master": 10, "6pak": 15, "connectmast": 25})
+
 v4kit_handheld = Items("V4 Kit + Handheld Kit", 3)
 v4kit_handheld.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_zpass = Items("V4 Kit + Zpass Kit", 3)
+v4kit_zpass = Items("V4 Kit + ZPass Kit", 3)
 v4kit_zpass.boxes.update({"v4kit": 1, "9x8x4": 2, "6pak": 6, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
-v4kit_handheld_zpass = Items("V4 Kit + Handheld Kit + Zpass Kit", 5)
+v4kit_handheld_zpass = Items("V4 Kit + Handheld Kit + ZPass Kit", 5)
 v4kit_handheld_zpass.boxes.update({"9x8x4": 1, "cube": 2, "9pak": 9, "9pak-6": 6, "9pak-3": 3})
 
 handheld_kit = Items("Handheld Kit", 2)
@@ -48,10 +51,11 @@ cards = Items("Cards", 0.01)
 cards.boxes.update({"9x8x4": 600, "cube": 1200, "v4master": 2000})
 
 ldtcu = Items("LDTCU", 0.2)
-ldtcu.boxes.update({"v4kit": 6, "9x8x4": 18, "10x10x5": 36, "cube": 70, "square": 80, "v4master": 200})
+ldtcu.boxes.update({"v4kit": 6, "9x8x4": 18, "10x10x5": 36, "cube": 72, "square": 80, "v4master": 200})
 
 items = []
 items.append(v4kit)
+items.append(v4kit_cable)
 items.append(v4kit_handheld)
 items.append(v4kit_zpass)
 items.append(v4kit_handheld_zpass)
